@@ -255,6 +255,25 @@
           </dependency>
         </dependencies>
       </plugin>
+      <!-- ✅ PiTest Mutation Testing -->
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.16.1</version>
+        <configuration>
+          <targetClasses>
+            <param>org.apache.commons.collections4.*</param>
+          </targetClasses>
+          <targetTests>
+            <param>org.apache.commons.collections4.*</param>
+          </targetTests>
+          <outputFormats>
+            <param>HTML</param>
+          </outputFormats>
+          <threads>4</threads>
+          <timestampedReports>false</timestampedReports>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <reporting>
@@ -498,10 +517,6 @@
     </developer>
     <developer>
       <name>Adrian Nistor</name>
-      <id>adriannistor</id>
-    </developer>
-    <developer>
-      <name>Arun M. Thomas</name>
       <id>amamment</id>
     </developer>
     <developer>
