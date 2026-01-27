@@ -12,5 +12,11 @@ jobs:
           distribution: 'temurin'
       - name: Build and Run JMH
         run: |
-          mvn clean test-compile "-Drat.skip=true"
-          mvn exec:java "-Drat.skip=true" "-Dexec.mainClass=org.openjdk.jmh.Main" "-Dexec.args=.*MyBenchmark.* -f 1 -wi 1 -i 1" "-Dexec.classpathScope=test"
+          # 1. بناء المشروع وتوليد ملفات الـ Metadata
+          mvn clean install -DskipTests -Drat.skip=true
+          
+          # 2. تشغيل الـ Benchmark باستخدام الكلاس المولد (Uber-jar)
+          mvn exec:java "-Drat.skip=true" \
+            "-Dexec.mainClass=org.openjdk.jmh.Main" \
+            "-Dexec.args=-f 1 -wi 1 -i 1 .*MyBenchmark.*" \
+            "-Dexec.classpathScope=test"
