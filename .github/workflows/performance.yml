@@ -1,0 +1,16 @@
+name: JMH Performance Test
+on: [push]
+jobs:
+  run-benchmark:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build and Run JMH
+        run: |
+          mvn clean test-compile "-Drat.skip=true"
+          mvn exec:java "-Drat.skip=true" "-Dexec.mainClass=org.openjdk.jmh.Main" "-Dexec.args=.*MyBenchmark.* -f 1 -wi 1 -i 1" "-Dexec.classpathScope=test"
