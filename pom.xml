@@ -395,7 +395,7 @@
       <id>benchmark</id>
       <properties>
         <skipTests>true</skipTests>
-        <benchmark>org.apache</benchmark>
+        <benchmark>.*MyBenchmark.*</benchmark>
       </properties>
       <dependencies>
         <dependency>
@@ -413,7 +413,6 @@
       </dependencies>
       <build>
         <plugins>
-          <!-- Enable the compilation of the benchmarks -->
           <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>${commons.compiler.version}</version>
@@ -421,9 +420,15 @@
               <testIncludes>
                 <testInclude>**/*</testInclude>
               </testIncludes>
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>org.openjdk.jmh</groupId>
+                  <artifactId>jmh-generator-annprocess</artifactId>
+                  <version>${commons.jmh.version}</version>
+                </path>
+              </annotationProcessorPaths>
             </configuration>
           </plugin>
-          <!-- Hook the benchmarks to the test phase -->
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
