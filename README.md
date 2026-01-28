@@ -119,14 +119,11 @@ Apache Commons Components
 Please see the [list of components](https://commons.apache.org/components.html)
 
 ## 🚀 Benchmark Results (JMH)
-The performance test was executed locally on Apache Commons Collections. 
-The results show the average time taken for collection operations.
+### 📊 Final Performance Results (Throughput Mode)
+The following real-time data was generated after 1h 15m of execution:
 
-| Benchmark | Mode | Score | Error | Units |
-|-----------|------|-------|-------|-------|
-| MyBenchmark.testCollectionPerformance | avgt | 0.950 | ± 0.047 | us/op |
+| Benchmark               | Score (ops/ms) | Accuracy (Error) |
 
-**Execution Details:**
-- **JMH Version:** 1.37
-- **Total Time:** 08:22 min
-- **Success Status:** BUILD SUCCESS
+| **HashBag.add**         | **68,922**     | ± 35,064         |
+| **TreeBag.add**         | **18,319**     | ± 1,218          |
+| **SynchronizedBag.add** | **12,819**     | ± 229            |
