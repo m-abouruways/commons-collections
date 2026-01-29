@@ -1857,15 +1857,19 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
         }
         if (check != sum) {
             // Resort to locking all segments
-            sum = 0;
-            for (final Segment<K, V> segment : segments) {
-                segment.lock();
-            }
-            for (final Segment<K, V> segment : segments) {
-                sum += segment.count;
-            }
-            for (final Segment<K, V> segment : segments) {
-                segment.unlock();
+             for (final Segment<K, V> segment : segments) {
+                 segment.lock();
+             }
+            try {
+                sum = 0;
+                for (final Segment<K, V> segment : segments) {
+                    sum += segment.count;
+                }
+            } finally {
+                // نضمن تحرير القفل لجميع القطاعات مهما حدث داخل بلوك try
+                for (final Segment<K, V> segment : segments) {
+                    segment.unlock();
+                }
             }
         }
         return sum > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) sum;
