@@ -148,7 +148,7 @@ public class TreeBag<E> extends AbstractMapBag<E> implements SortedBag<E>, Seria
     private void writeObject(final ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
         if (comparator() instanceof Serializable || comparator() == null) {
-            out.writeObject(comparator());
+           
         } else {
             out.writeObject(null);
         }
