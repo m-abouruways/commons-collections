@@ -1591,24 +1591,26 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
                 return false;
             }
         }
-        // Resort to locking all segments
+// Resort to locking all segments
         for (final Segment<K, V> segment : segments) {
             segment.lock();
         }
-        boolean found = false;
+        
         try {
+            boolean found = false; // تعريف المتغير مرة واحدة فقط هنا
             for (final Segment<K, V> segment : segments) {
                 if (segment.containsValue(value)) {
                     found = true;
                     break;
                 }
             }
+            return found; 
         } finally {
             for (final Segment<K, V> segment : segments) {
                 segment.unlock();
             }
         }
-        return found;
+        
     }
 
     /**
