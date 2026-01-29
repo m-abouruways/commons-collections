@@ -37,6 +37,7 @@ import org.apache.commons.collections4.iterators.AbstractMapIteratorTest;
 import org.apache.commons.collections4.map.AbstractIterableMapTest;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Nested; // تأكد من وجود هذا الاستيراد في أعلى الملف
 
 /**
  * Tests {@link BidiMap}.
@@ -46,9 +47,11 @@ import org.junit.jupiter.api.Test;
  */
 public abstract class AbstractBidiMapTest<K, V> extends AbstractIterableMapTest<K, V> {
 
+    @Nested // هذا هو التعديل المطلوب لإصلاح خطأ السونار
     public class BidiMapEntrySetTest extends MapEntrySetTest {
 
         public BidiMapEntrySetTest() {
+            super(); // استدعاء المشيد الأساسي
         }
 
         @Test
