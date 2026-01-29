@@ -50,6 +50,7 @@ import org.apache.commons.collections4.collection.AbstractCollectionTest;
 import org.apache.commons.collections4.keyvalue.DefaultMapEntry;
 import org.apache.commons.collections4.set.AbstractSetTest;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -137,7 +138,8 @@ import org.junit.jupiter.api.Test;
  * @param <V> the value type.
  */
 public abstract class AbstractMapTest<M extends Map<K, V>, K, V> extends AbstractObjectTest {
-
+    
+    @Nested // هذا هو التعديل المطلوب لإصلاح خطأ السونار
     public class MapEntrySetTest extends AbstractSetTest<Map.Entry<K, V>> {
 
         @Override
